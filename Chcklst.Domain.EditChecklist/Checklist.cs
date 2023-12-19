@@ -5,16 +5,31 @@ namespace Chcklst.Domain.EditChecklist;
 
 public class Checklist : AbstractEntity<ChecklistId, Guid>
 {
-    private readonly IList<ChecklistItem> items = new List<ChecklistItem>();
-    
-    public Checklist(ChecklistId id, string name) : base(id)
+    private readonly IList<EditEvent> editHistory;
+    private readonly IList<ChecklistItem> items;
+
+    public Checklist(string name) : this(
+        ChecklistId.Create(),
+        name,
+        new List<ChecklistItem>(),
+        new List<EditEvent>()) {}
+
+    public Checklist(
+        ChecklistId id,
+        string name,
+        IEnumerable<ChecklistItem> items,
+        IList<EditEvent> editHistory) : base(id)
     {
         Guard.Against.NullOrWhiteSpace(name, nameof(name));
         this.Name = name;
+        this.items = items.ToList();
+        this.editHistory = editHistory;
     }
 
+    public IList<EditEvent> EditHistory => this.editHistory.AsReadOnly();
+
     public IList<ChecklistItem> Items => this.items.AsReadOnly();
-    
+
     public string Name { get; private set; }
 
     public void AddItem() => this.items.Add(new ChecklistItem());

@@ -20,4 +20,14 @@ public class ChecklistItemTests
 
         item.Text.Should().Be(text);
     }
+
+    [Fact]
+    public void ShouldBeReconstitutable()
+    {
+        var text = "Some item text";
+
+        var item = new ChecklistItem(text);
+
+        item.Text.Should().Be(text);
+    }
 }

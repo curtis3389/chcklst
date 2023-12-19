@@ -7,6 +7,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <RootNamespace>Chcklst.Domain.Management.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Chcklst.Domain.SharedKernel\Chcklst.Domain.SharedKernel.csproj" />
+    <ProjectReference Include="..\Chcklst.Domain.Management\Chcklst.Domain.Management.csproj" />
   </ItemGroup>
 
 </Project>

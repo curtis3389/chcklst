@@ -4,11 +4,20 @@ public class ChecklistTests
 {
     private static readonly ChecklistId ChecklistId = new ChecklistId(Guid.NewGuid());
     private static readonly string ChecklistName = "A Checklist Name";
-    
+
+    public static readonly IList<ChecklistItem> ChecklistItems = new List<ChecklistItem>
+    {
+        new ("First Item"),
+        new ("Second Item"),
+        new ("Third Item"),
+        new ("Fourst Item"),
+        new ("Fiveth Item"),
+    };
+
     [Fact]
     public void ShouldThrowIfEmptyName()
     {
-        var createWithEmptyName = () => new Checklist(ChecklistId, string.Empty);
+        var createWithEmptyName = () => new Checklist(string.Empty);
 
         FluentActions.Invoking(createWithEmptyName).Should().Throw<ArgumentException>();
     }
@@ -16,7 +25,7 @@ public class ChecklistTests
     [Fact]
     public void ShouldHaveProvidedName()
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
 
         checklist.Name.Should().Be(ChecklistName);
     }
@@ -24,7 +33,7 @@ public class ChecklistTests
     [Fact]
     public void ShouldStartWithZeroItems()
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
 
         checklist.Items.Count.Should().Be(0);
     }
@@ -32,7 +41,7 @@ public class ChecklistTests
     [Fact]
     public void ShouldAddItemWhenAddingAnItem()
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
         var beforeCount = checklist.Items.Count;
 
         checklist.AddItem();
@@ -48,7 +57,7 @@ public class ChecklistTests
     [InlineData(4)]
     public void ShouldRemoveProvidedItem(int index)
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
         checklist.AddItem();
         checklist.AddItem();
         checklist.AddItem();
@@ -64,7 +73,7 @@ public class ChecklistTests
     [Fact]
     public void ShouldGetItemsReadonly()
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
         checklist.AddItem();
         checklist.AddItem();
         checklist.AddItem();
@@ -89,16 +98,16 @@ public class ChecklistTests
     [InlineData(1, 4)]
     public void ShouldReorderItems(int itemIndex, int destinationIndex)
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
         checklist.AddItem();
         checklist.AddItem();
         checklist.AddItem();
         checklist.AddItem();
         checklist.AddItem();
         var item = checklist.Items[itemIndex];
-        
+
         checklist.ReorderItem(item, destinationIndex);
-        
+
         checklist.Items[destinationIndex].Should().Be(item);
     }
 
@@ -109,7 +118,7 @@ public class ChecklistTests
     [InlineData(500)]
     public void ShouldThrowForInvalidReorderIndex(int index)
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
         checklist.AddItem();
         checklist.AddItem();
         checklist.AddItem();
@@ -126,21 +135,21 @@ public class ChecklistTests
     [Fact]
     public void ShouldThrowForReorderUnknownItem()
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
         var item = new ChecklistItem();
-        
+
         var reorder = () => checklist.ReorderItem(item, 0);
 
         FluentActions.Invoking(reorder).Should().Throw<ArgumentException>();
         checklist.Items.Should().NotContain(item);
     }
-    
+
     [Fact]
     public void ShouldThrowForRemoveUnknownItem()
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
         var item = new ChecklistItem();
-        
+
         var reorder = () => checklist.RemoveItem(item);
 
         FluentActions.Invoking(reorder).Should().Throw<ArgumentException>();
@@ -150,13 +159,13 @@ public class ChecklistTests
     public void ShouldChangeName()
     {
         var newName = "A New Checklist Name";
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
 
         checklist.ChangeName(newName);
 
         checklist.Name.Should().Be(newName);
     }
-    
+
     [Theory]
     [InlineData("")]
     [InlineData("\t")]
@@ -167,10 +176,18 @@ public class ChecklistTests
     [InlineData("    \t   \n ")]
     public void ShouldThrowForInvalidNameChange(string invalidName)
     {
-        var checklist = new Checklist(ChecklistId, ChecklistName);
+        var checklist = new Checklist(ChecklistName);
 
         var changeName = () => checklist.ChangeName(invalidName);
 
         FluentActions.Invoking(changeName).Should().Throw<ArgumentException>();
+    }
+
+    [Fact]
+    public void ShouldBeReconstitutable()
+    {
+        var checklist = new Checklist(ChecklistId, ChecklistName, ChecklistItems);
+
+        checklist.Items.Should().Equal(ChecklistItems);
     }
 }

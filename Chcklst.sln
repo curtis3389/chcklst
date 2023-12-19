@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chcklst.Domain.SharedKernel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chcklst.Domain.SharedKernel.Tests", "Chcklst.Domain.SharedKernel.Tests\Chcklst.Domain.SharedKernel.Tests.csproj", "{224961B1-F931-4A7E-9390-D6AF4D571287}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chcklst.Domain.Management", "Chcklst.Domain.Management\Chcklst.Domain.Management.csproj", "{D59A39E0-C221-42C6-89DC-DE92EC7FA87B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chcklst.Domain.Management.Tests", "Chcklst.Domain.Management.Tests\Chcklst.Domain.Management.Tests.csproj", "{B524F825-1241-440B-9280-41CF2A86B188}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +58,13 @@ Global
 		{224961B1-F931-4A7E-9390-D6AF4D571287}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{224961B1-F931-4A7E-9390-D6AF4D571287}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{224961B1-F931-4A7E-9390-D6AF4D571287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59A39E0-C221-42C6-89DC-DE92EC7FA87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59A39E0-C221-42C6-89DC-DE92EC7FA87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59A39E0-C221-42C6-89DC-DE92EC7FA87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59A39E0-C221-42C6-89DC-DE92EC7FA87B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B524F825-1241-440B-9280-41CF2A86B188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B524F825-1241-440B-9280-41CF2A86B188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B524F825-1241-440B-9280-41CF2A86B188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B524F825-1241-440B-9280-41CF2A86B188}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
