@@ -11,23 +11,14 @@ public class ChecklistItemTests
     }
 
     [Fact]
-    public void ShouldSetText()
-    {
-        var text = "Some item text";
-        var item = new ChecklistItem();
-
-        item.SetText(text);
-
-        item.Text.Should().Be(text);
-    }
-
-    [Fact]
     public void ShouldBeReconstitutable()
     {
+        var id = ChecklistItemId.Create();
         var text = "Some item text";
 
-        var item = new ChecklistItem(text);
+        var item = new ChecklistItem(id, text);
 
+        item.Id.Should().Be(id);
         item.Text.Should().Be(text);
     }
 }

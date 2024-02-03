@@ -6,6 +6,7 @@ public class ChecklistEditor : AbstractEntity<EditorId, Guid>
 {
     public ChecklistEditor(EditorId id) : base(id)
     {
+        this.EditorId = id;
     }
 
     public EditorId EditorId { get; }

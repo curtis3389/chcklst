@@ -1,18 +1,18 @@
 namespace Chcklst.Domain.EditChecklist;
 
-public class ChecklistItem
+using Chcklst.Domain.SharedKernel;
+
+public class ChecklistItem : AbstractEntity<ChecklistItemId, Guid>
 {
-    public ChecklistItem() : this(string.Empty) {}
+    public ChecklistItem() : base(ChecklistItemId.Create())
+    {
+        this.Text = string.Empty;
+    }
 
-    public ChecklistItem(string text)
+    public ChecklistItem(ChecklistItemId id, string text) : base(id)
     {
         this.Text = text;
     }
 
-    public string Text { get; private set; }
-
-    public void SetText(string text)
-    {
-        this.Text = text;
-    }
+    public string Text { get; }
 }
